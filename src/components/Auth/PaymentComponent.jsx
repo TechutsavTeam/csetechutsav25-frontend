@@ -25,6 +25,8 @@ const PaymentComponent = ({
   setOpen,
   setMessage,
   setMessageBack,
+  transactionScreenshot,
+  setTransactionScreenshot,
 }) => {
   const options = ["Not Selected", "CSE", "IT", "CSBS", "DS"];
   const original = [
@@ -67,6 +69,10 @@ const PaymentComponent = ({
       setOpen(true);
       setMessage("Please enter your transaction number");
       setMessageBack("red");
+    } else if (!transactionScreenshot) {
+      setOpen(true);
+      setMessage("Please upload a screenshot of the transaction");
+      setMessageBack("red");  
     } else {
       setSelectedDepartment(original[selectedIndex]);
       setOpen(true);
@@ -75,6 +81,13 @@ const PaymentComponent = ({
       setCurrentPage(3);
     }
   }
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setTransactionScreenshot(file);
+    }
+  };
 
   return (
     <Paper
@@ -200,6 +213,31 @@ const PaymentComponent = ({
                 }}
               />
             </div>
+          </div>
+          <div className="flex flex-col gap-3 w-full items-center">
+            <div className="flex flex-col gap-3 w-full items-start">
+              <label
+                htmlFor=""
+                className=" tracking-wider after:content-['*'] after:text-red-600 after:pl-1"
+              >
+                Transaction Screenshot
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+            </div>
+            {transactionScreenshot && (
+              <div>
+                <h4>Preview:</h4>
+                <img
+                  src={URL.createObjectURL(transactionScreenshot)}
+                  alt="Payment Screenshot"
+                  width="200"
+                />
+              </div>
+            )}
             <div className="flex max-w-[300px] w-full justify-around items-center">
               <button
                 className={button}

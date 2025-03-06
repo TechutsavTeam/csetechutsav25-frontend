@@ -23,6 +23,8 @@ const SignUp = () => {
   const [message, setMessage] = useState("");
   const [messageBack, setMessageBack] = useState("green");
 
+  const [transactionScreenshot, setTransactionScreenshot] = useState(null);
+
   const button =
     "font-semibold bg-white/50 px-2 py-2 rounded-md tracking-wide hover:bg-black hover:text-white duration-150 mt-4";
   return (
@@ -67,6 +69,8 @@ const SignUp = () => {
           setOpen={setOpen}
           setMessage={setMessage}
           setMessageBack={setMessageBack}
+          transactionScreenshot={transactionScreenshot}
+          setTransactionScreenshot={setTransactionScreenshot}
         />
       ) : (
         <CreatorComponent
@@ -78,6 +82,7 @@ const SignUp = () => {
           department={department}
           transactionNumber={transactionNumber}
           selectedDepartment={selectedDepartment}
+          transactionScreenshot={transactionScreenshot}
           setOpen={setOpen}
           setMessage={setMessage}
           setMessageBack={setMessageBack}
