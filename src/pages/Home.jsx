@@ -1,186 +1,246 @@
 import React, { useState, useEffect } from "react";
+import { Link as Alink } from "react-scroll";
+import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import "../css/button.css";
 import CountdownTimer from "../components/CountdownTImer";
-import Particles from "../components/Particles";
+// Import the background image
+import tceBgImage from "../assets/tce-bg.png";
+
+// Color theme
+const theme = {
+  eerieBlack: "#1C2127",
+  berkeleyBlue: "#0B385F",
+  uclaBlue: "#3373B0",
+  columbiaBlue: "#BED4E9",
+  aliceBlue: "#E7F1FB"
+};
 
 const Home = ({ authenticated }) => {
+  const [isRegisterHovered, setIsRegisterHovered] = useState(false);
+  const [isLoginHovered, setIsLoginHovered] = useState(false);
+  const [isExploreHovered, setIsExploreHovered] = useState(false);
+  const [isProfileHovered, setIsProfileHovered] = useState(false);
   const [typedText, setTypedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [welcomeData, setWelcomeData] = useState({ 
-    welcomeText: "", 
-    userName: "" 
-  });
   const fullText = "Decoding the Digital: Unveiling the future of tech.";
   const isDesktop = useMediaQuery("(min-width:900px)");
-  const navigate = useNavigate();
-
-  // Fetch welcome data from backend
-  useEffect(() => {
-    const fetchWelcomeData = async () => {
-      try {
-        const response = await axios.get('/api/welcome');
-        setWelcomeData({
-          welcomeText: response.data.welcomeText || "Welcome to INNOHACKS'25, where innovation meets technology!",
-          userName: response.data.userName || ""
-        });
-      } catch (error) {
-        console.error("Error fetching welcome data:", error);
-        // Set default values in case of error
-        setWelcomeData({
-          welcomeText: "Welcome to INNOHACKS'25, where innovation meets technology!",
-          userName: ""
-        });
-      }
-    };
-
-    fetchWelcomeData();
-  }, []);
-
-  // Typing effect for the tagline
+  const isTablet = useMediaQuery("(min-width:600px)");
+  const isMobile = useMediaQuery("(max-width:480px)");
+  
+  // Typing effect
   useEffect(() => {
     if (currentIndex < fullText.length) {
       const timeout = setTimeout(() => {
-        setTypedText((prev) => prev + fullText[currentIndex]);
-        setCurrentIndex((prev) => prev + 1);
+        setTypedText(prev => prev + fullText[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
       }, 50);
       return () => clearTimeout(timeout);
     }
   }, [currentIndex, fullText]);
 
-  // Navigation handlers
-  const handleProfileClick = () => {
-    navigate("/profile");
-  };
-
-  const handleRegisterClick = () => {
-    navigate("/register");
-  };
-
   return (
-    <div 
-      className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden"
-      style={{
-        background: "linear-gradient(to bottom, #f8fcff, #e0f2fe)",
-      }}
-    >
-      {/* Particles Background */}
-      <div className="absolute inset-0 z-0">
-        <Particles
-          particleCount={200}
-          particleSpread={10}
-          speed={0.1}
-          particleColors={["#1e3a8a", "#3b82f6", "#0f172a"]}
-          moveParticlesOnHover={true}
-          particleHoverFactor={2}
-          alphaParticles={true}
-          particleBaseSize={150}
-          sizeRandomness={1.5}
-          cameraDistance={20}
-          disableRotation={false}
-          className="w-full h-full"
-        />
-      </div>
+    <div className="relative w-full min-h-screen bg-white">
+      {/* Background image with increased opacity */}
+      <div 
+        className="absolute inset-0 w-full h-full z-0" 
+        style={{
+          backgroundImage: `url(${tceBgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: "0.7", // Increased opacity (less faded)
+        }}
+      ></div>
+      
+      {/* Overlay gradient with reduced opacity */}
+      <div 
+        className="absolute inset-0 w-full h-full z-0" 
+        style={{
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.7), rgba(255,255,255,0.8))", // Reduced opacity
+        }}
+      ></div>
+      
+      {/* Center content with improved mobile padding */}
+      <div className="flex flex-col items-center justify-center w-full py-10 sm:py-16 md:py-20 px-4 sm:px-6 relative z-10">
+        <div className="flex flex-col items-center text-center w-full max-w-6xl">
+          {/* College name banner - More compact on mobile */}
+          <div 
+            className="mb-4 sm:mb-8 p-1 sm:p-2 px-3 sm:px-6 rounded-full backdrop-blur-sm shadow-lg animate-pulse-subtle" 
+            style={{ 
+              backgroundColor: `${theme.uclaBlue}20`,
+              border: `1px solid ${theme.columbiaBlue}40`
+            }}
+          >
+            <p className="text-xs sm:text-sm lg:text-lg tracking-widest font-semibold" style={{ color: theme.berkeleyBlue }}>
+              THIAGARAJAR COLLEGE OF ENGINEERING PRESENTS
+            </p>
+          </div>
 
-      {/* Content */}
-      <div className="flex flex-col items-center text-center max-w-6xl w-full py-20 px-6 relative z-10">
-        <div 
-          className="mb-8 p-2 px-6 rounded-full backdrop-blur-md shadow-lg" 
-          style={{ backgroundColor: "rgba(180, 210, 240, 0.2)", border: "1px solid rgba(180, 210, 240, 0.5)" }}
-        >
-          <p className="text-sm lg:text-lg tracking-widest font-semibold text-blue-900">
-            THIAGARAJAR COLLEGE OF ENGINEERING PRESENTS
-          </p>
-        </div>
+          {/* INNOHACKS title - Responsive font sizing */}
+          <div className="relative">
+            <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wider relative z-20 animate-fade-in-up">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B385F] to-[#3373B0] animate-text-shimmer" 
+                style={{ 
+                  backgroundImage: `linear-gradient(to right, ${theme.berkeleyBlue}, ${theme.uclaBlue}, ${theme.berkeleyBlue})`,
+                  backgroundSize: "200% auto"
+                }}
+              >
+                INNOHACKS'25
+              </span>
+            </h1>
+          </div>
 
-        {/* INNOHACKS'25 Title */}
-        <h1 className="font-bold lg:text-7xl md:text-6xl text-5xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6]">
-          INNOHACKS'25
-        </h1>
+          {/* Date banner - More compact on mobile */}
+          <div 
+            className="mt-4 sm:mt-6 px-4 sm:px-6 py-1 sm:py-2 rounded-full backdrop-blur-sm animate-float-enhanced shadow-md"
+            style={{ 
+              backgroundColor: `${theme.uclaBlue}20`,
+              border: `1px solid ${theme.columbiaBlue}40`
+            }}
+          >
+            <p className="text-sm sm:text-lg lg:text-xl font-bold tracking-wider" style={{ color: theme.berkeleyBlue }}>
+  <span className="text-transparent bg-clip-text bg-gradient-to-r animate-text-shimmer"
+    style={{ 
+      backgroundImage: `linear-gradient(to right, ${theme.eerieBlack}, ${theme.berkeleyBlue}, ${theme.eerieBlack})`, // Darker gradient
+      backgroundSize: "200% auto"
+    }}
+  ></span>On 20th March</p>
+          </div>
 
-        <div className="mt-6">
-          <CountdownTimer targetDate="2025-03-20T00:00:00" />
-        </div>
+          {/* CountdownTimer - Already responsive from component */}
+          <div className="mt-4 sm:mt-6 animate-fade-in">
+            <CountdownTimer targetDate="2025-03-20T00:00:00" />
+          </div>
 
-        <p className="text-xl lg:text-2xl mt-4 text-blue-700">
-          {typedText}
-        </p>
-        
-        {/* Welcome text with conditional rendering for userName */}
-        <div 
-          className="mt-10 max-w-3xl backdrop-blur-sm p-6 rounded-xl shadow-lg animate-fade-in"
-          style={{ 
-            backgroundColor: "rgba(180, 210, 240, 0.15)", 
-            border: "1px solid rgba(180, 210, 240, 0.4)"
-          }}
-        >
+          {/* Typed text - Responsive height and font size */}
+          <div className="h-12 sm:h-16 flex items-center justify-center mt-2 sm:mt-4">
+            <p className="text-lg sm:text-xl lg:text-2xl min-h-[24px] sm:min-h-[28px] px-2" style={{ color: theme.berkeleyBlue }}>
+              {typedText}
+              <span className="animate-blink">|</span>
+            </p>
+          </div>
+
+          {/* Edition banner - More compact on mobile */}
+          <div 
+            className="mb-4 sm:mb-6 p-1 sm:p-2 px-3 sm:px-6 rounded-full backdrop-blur-sm shadow-md animate-pulse-subtle"
+            style={{ 
+              backgroundColor: `${theme.uclaBlue}15`,
+              border: `1px solid ${theme.columbiaBlue}30`,
+              marginTop: '0.5rem',
+              maxWidth: isMobile ? '90%' : '100%'
+            }}
+          >
+            <p className="text-sm sm:text-lg lg:text-xl font-bold tracking-wider" style={{ color: theme.berkeleyBlue }}>
+  <span className="text-transparent bg-clip-text bg-gradient-to-r animate-text-shimmer"
+    style={{ 
+      backgroundImage: `linear-gradient(to right, ${theme.eerieBlack}, ${theme.berkeleyBlue}, ${theme.eerieBlack})`, // Darker gradient
+      backgroundSize: "200% auto"
+    }}
+  >
+    5th EDITION
+  </span> • 500+ PARTICIPANTS 
+</p>
+          </div>
+
+          {/* Authentication-dependent content */}
           {authenticated ? (
-            <h3 className="text-xl lg:text-2xl font-semibold mb-2 text-blue-900">
-              Welcome, {sessionStorage.getItem("name")}!
-            </h3>
+            <div className="flex flex-col items-center gap-3 sm:gap-6 mt-4 sm:mt-6 animate-fade-in">
+              <p className="text-xl sm:text-2xl font-semibold filter drop-shadow-sm" style={{ color: theme.berkeleyBlue }}>
+                Welcome, {sessionStorage.getItem("name")}
+              </p>
+              {/* Button layout - Stack on mobile, side by side on tablet and up */}
+              <div className="flex gap-3 sm:gap-5 flex-col sm:flex-row w-full sm:w-auto px-4 sm:px-0">
+                <Alink
+                  to="events"
+                  spy={true}
+                  smooth={true}
+                  duration={500}
+                  offset={-70}
+                  className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-center cursor-pointer transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg w-full"
+                  style={{ 
+                    backgroundColor: isExploreHovered ? theme.berkeleyBlue : "white",
+                    color: isExploreHovered ? "white" : theme.berkeleyBlue,
+                    border: `2px solid ${theme.berkeleyBlue}`
+                  }}
+                  onMouseEnter={() => setIsExploreHovered(true)}
+                  onMouseLeave={() => setIsExploreHovered(false)}
+                >
+                  <span className="relative z-10">Explore</span>
+                  <span 
+                    className="absolute inset-0 -z-10 transition-transform duration-300 ease-in-out"
+                    style={{ 
+                      transform: isExploreHovered ? 'translateY(0)' : 'translateY(100%)',
+                      background: `linear-gradient(45deg, ${theme.berkeleyBlue}, ${theme.uclaBlue})`
+                    }}
+                  ></span>
+                </Alink>
+                <Link
+                  to="/profile"
+                  className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg w-full"
+                  style={{ 
+                    backgroundColor: isProfileHovered ? theme.uclaBlue : "white",
+                    color: isProfileHovered ? "white" : theme.uclaBlue,
+                    border: `2px solid ${theme.uclaBlue}`
+                  }}
+                  onMouseEnter={() => setIsProfileHovered(true)}
+                  onMouseLeave={() => setIsProfileHovered(false)}
+                >
+                  <span className="relative z-10">Profile</span>
+                  <span 
+                    className="absolute inset-0 -z-10 transition-transform duration-300 ease-in-out"
+                    style={{ 
+                      transform: isProfileHovered ? 'translateY(0)' : 'translateY(100%)',
+                      background: `linear-gradient(45deg, ${theme.uclaBlue}, ${theme.columbiaBlue})`
+                    }}
+                  ></span>
+                </Link>
+              </div>
+            </div>
           ) : (
-            welcomeData.userName && (
-              <h3 className="text-xl lg:text-2xl font-semibold mb-2 text-blue-900">
-                Hello, {welcomeData.userName}!
-              </h3>
-            )
+            <div className="flex gap-3 sm:gap-5 mt-4 sm:mt-8 sm:flex-row flex-col animate-fade-in w-full px-4 sm:px-0 sm:w-auto">
+              <Link
+                to="/register"
+                className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg w-full"
+                style={{ 
+                  backgroundColor: isRegisterHovered ? theme.berkeleyBlue : "white",
+                  color: isRegisterHovered ? "white" : theme.berkeleyBlue,
+                  border: `2px solid ${theme.berkeleyBlue}`
+                }}
+                onMouseEnter={() => setIsRegisterHovered(true)}
+                onMouseLeave={() => setIsRegisterHovered(false)}
+              >
+                <span className="relative z-10">Register</span>
+                <span 
+                  className="absolute inset-0 -z-10 transition-transform duration-300 ease-in-out"
+                  style={{ 
+                    transform: isRegisterHovered ? 'translateY(0)' : 'translateY(100%)',
+                    background: `linear-gradient(45deg, ${theme.berkeleyBlue}, ${theme.uclaBlue})`
+                  }}
+                ></span>
+              </Link>
+              <Link
+                to="/login"
+                className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg w-full"
+                style={{ 
+                  backgroundColor: isLoginHovered ? theme.uclaBlue : "white",
+                  color: isLoginHovered ? "white" : theme.uclaBlue,
+                  border: `2px solid ${theme.uclaBlue}`
+                }}
+                onMouseEnter={() => setIsLoginHovered(true)}
+                onMouseLeave={() => setIsLoginHovered(false)}
+              >
+                <span className="relative z-10">Login</span>
+                <span 
+                  className="absolute inset-0 -z-10 transition-transform duration-300 ease-in-out"
+                  style={{ 
+                    transform: isLoginHovered ? 'translateY(0)' : 'translateY(100%)',
+                    background: `linear-gradient(45deg, ${theme.uclaBlue}, ${theme.columbiaBlue})`
+                  }}
+                ></span>
+              </Link>
+            </div>
           )}
-          <p className="text-lg lg:text-xl text-blue-800 leading-relaxed">
-            {welcomeData.welcomeText}
-          </p>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-center">
-          <button 
-            className="px-8 py-3 rounded-full font-semibold text-white shadow-lg transition-all duration-300 relative overflow-hidden"
-            style={{ 
-              background: "linear-gradient(135deg, #1e3a8a, #3b82f6)",
-              border: "2px solid rgba(255, 255, 255, 0.2)"
-            }}
-            onClick={handleProfileClick}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-3px)";
-              e.currentTarget.style.boxShadow = "0 10px 25px -5px rgba(59, 130, 246, 0.5)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 4px 6px -1px rgba(59, 130, 246, 0.3)";
-            }}
-          >
-            <span className="relative z-10">Explore Profile</span>
-            <div 
-              className="absolute -inset-full h-full w-1/2 z-5 animate-card-shine"
-              style={{
-                background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)",
-                transform: "rotate(25deg)"
-              }}
-            ></div>
-          </button>
-          
-          <button 
-            className="px-8 py-3 rounded-full font-semibold transition-all duration-300 relative overflow-hidden"
-            style={{ 
-              background: "rgba(255, 255, 255, 0.7)",
-              border: "2px solid rgba(59, 130, 246, 0.3)",
-              color: "#1e3a8a"
-            }}
-            onClick={handleRegisterClick}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-3px)";
-              e.currentTarget.style.boxShadow = "0 10px 25px -5px rgba(59, 130, 246, 0.3)";
-              e.currentTarget.style.background = "rgba(255, 255, 255, 0.9)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 4px 6px -1px rgba(59, 130, 246, 0.2)";
-              e.currentTarget.style.background = "rgba(255, 255, 255, 0.7)";
-            }}
-          >
-            <span className="relative z-10">Register Now</span>
-          </button>
         </div>
       </div>
     </div>
