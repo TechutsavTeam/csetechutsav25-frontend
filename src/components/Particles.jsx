@@ -26,7 +26,6 @@ const vertex = /* glsl */ `
   uniform float uTime;
   uniform float uSpread;
   uniform float uBaseSize;
-  uniform float uSizeRandomness;
   
   varying vec4 vRandom;
   varying vec3 vColor;
@@ -45,7 +44,7 @@ const vertex = /* glsl */ `
     mPos.z += sin(t * random.w + 6.28 * random.y) * mix(0.1, 1.5, random.z);
     
     vec4 mvPos = viewMatrix * mPos;
-    gl_PointSize = (uBaseSize * (1.0 + uSizeRandomness * (random.x - 0.5))) / length(mvPos.xyz);
+    gl_PointSize = uBaseSize / length(mvPos.xyz);
     gl_Position = projectionMatrix * mvPos;
   }
 `;
@@ -83,7 +82,6 @@ const Particles = ({
   particleHoverFactor = 1,
   alphaParticles = false,
   particleBaseSize = 100,
-  sizeRandomness = 1,
   cameraDistance = 20,
   disableRotation = false,
   className,
@@ -157,7 +155,6 @@ const Particles = ({
         uTime: { value: 0 },
         uSpread: { value: particleSpread },
         uBaseSize: { value: particleBaseSize },
-        uSizeRandomness: { value: sizeRandomness },
         uAlphaParticles: { value: alphaParticles ? 1 : 0 },
       },
       transparent: true,
@@ -216,7 +213,6 @@ const Particles = ({
     particleHoverFactor,
     alphaParticles,
     particleBaseSize,
-    sizeRandomness,
     cameraDistance,
     disableRotation,
   ]);

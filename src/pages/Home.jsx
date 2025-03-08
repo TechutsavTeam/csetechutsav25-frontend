@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
 import "../css/button.css";
 import CountdownTimer from "../components/CountdownTImer";
+import Particles from "../components/Particles"; // Import the Particles component
 
 // Color theme
 const theme = {
@@ -24,6 +25,7 @@ const Home = ({ authenticated }) => {
   const fullText = "Decoding the Digital: Unveiling the future of tech.";
   const isDesktop = useMediaQuery("(min-width:900px)");
   const isTablet = useMediaQuery("(min-width:600px)");
+  const isMobile = useMediaQuery("(max-width:480px)");
   
   // Typing effect
   useEffect(() => {
@@ -38,24 +40,50 @@ const Home = ({ authenticated }) => {
 
   return (
     <div className="relative w-full min-h-screen bg-white">
-      {/* Center content - Adjusted padding to prevent overflow */}
-      <div className="flex flex-col items-center justify-center w-full py-20 px-6">
-        <div className="flex flex-col items-center text-center max-w-6xl w-full">
+      {/* Particles background - Increased particle count, size, and adjusted spread */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <Particles 
+          particleCount={400}  // Increased from 300 for more particles
+          particleSpread={8}   // Reduced from 12 to bring particles closer to view
+          speed={0.05}
+          particleColors={[theme.columbiaBlue, theme.aliceBlue, theme.uclaBlue]}
+          moveParticlesOnHover={true}
+          particleHoverFactor={0.7}  // Increased responsiveness to mouse
+          alphaParticles={true}
+          particleBaseSize={150}  // Increased from 80 for larger particles
+          cameraDistance={18}     // Reduced from 25 to bring particles closer
+          disableRotation={false}
+        />
+      </div>
+      
+      {/* Overlay gradient with reduced opacity for better particle visibility */}
+      <div 
+        className="absolute inset-0 w-full h-full z-0" 
+        style={{
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0.7))",  // Reduced opacity
+        }}
+      ></div>
+      
+      {/* Center content with improved mobile padding */}
+      <div className="flex flex-col items-center justify-center w-full py-10 sm:py-16 md:py-20 px-4 sm:px-6 relative z-10">
+        <div className="flex flex-col items-center text-center w-full max-w-6xl">
+          {/* College name banner - More compact on mobile */}
           <div 
-            className="mb-8 p-2 px-6 rounded-full backdrop-blur-sm shadow-lg animate-pulse-subtle" 
+            className="mb-4 sm:mb-8 p-1 sm:p-2 px-3 sm:px-6 rounded-full backdrop-blur-sm shadow-lg animate-pulse-subtle" 
             style={{ 
               backgroundColor: `${theme.uclaBlue}20`,
               border: `1px solid ${theme.columbiaBlue}40`
             }}
           >
-            <p className="text-sm lg:text-lg tracking-widest font-semibold" style={{ color: theme.berkeleyBlue }}>
+            <p className="text-xs sm:text-sm lg:text-lg tracking-widest font-semibold" style={{ color: theme.berkeleyBlue }}>
               THIAGARAJAR COLLEGE OF ENGINEERING PRESENTS
             </p>
           </div>
 
+          {/* INNOHACKS title - Responsive font sizing */}
           <div className="relative">
-            <h1 className="font-bold lg:text-7xl md:text-6xl text-5xl tracking-wider relative z-20 animate-fade-in-up">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r animate-text-shimmer" 
+            <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wider relative z-20 animate-fade-in-up">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B385F] to-[#3373B0] animate-text-shimmer" 
                 style={{ 
                   backgroundImage: `linear-gradient(to right, ${theme.berkeleyBlue}, ${theme.uclaBlue}, ${theme.berkeleyBlue})`,
                   backgroundSize: "200% auto"
@@ -66,41 +94,50 @@ const Home = ({ authenticated }) => {
             </h1>
           </div>
 
+          {/* Date banner - More compact on mobile */}
           <div 
-            className="mt-6 px-6 py-2 rounded-full backdrop-blur-sm animate-float-enhanced shadow-md"
+            className="mt-4 sm:mt-6 px-4 sm:px-6 py-1 sm:py-2 rounded-full backdrop-blur-sm animate-float-enhanced shadow-md"
             style={{ 
               backgroundColor: `${theme.uclaBlue}20`,
               border: `1px solid ${theme.columbiaBlue}40`
             }}
           >
-            <p className="lg:text-2xl text-xl font-medium" style={{ color: theme.berkeleyBlue }}>On 20th March</p>
+            <p className="text-sm sm:text-lg lg:text-xl font-bold tracking-wider" style={{ color: theme.berkeleyBlue }}>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r animate-text-shimmer"
+                style={{ 
+                  backgroundImage: `linear-gradient(to right, ${theme.eerieBlack}, ${theme.berkeleyBlue}, ${theme.eerieBlack})`, // Darker gradient
+                  backgroundSize: "200% auto"
+                }}
+              ></span>On 20th March</p>
           </div>
 
-          {/* Add CountdownTimer component here */}
-          <div className="mt-6 animate-fade-in">
+          {/* CountdownTimer - Already responsive from component */}
+          <div className="mt-4 sm:mt-6 animate-fade-in">
             <CountdownTimer targetDate="2025-03-20T00:00:00" />
           </div>
 
-          <div className="h-16 flex items-center justify-center mt-4">
-            <p className="text-xl lg:text-2xl min-h-[28px]" style={{ color: theme.berkeleyBlue }}>
+          {/* Typed text - Responsive height and font size */}
+          <div className="h-12 sm:h-16 flex items-center justify-center mt-2 sm:mt-4">
+            <p className="text-lg sm:text-xl lg:text-2xl min-h-[24px] sm:min-h-[28px] px-2" style={{ color: theme.berkeleyBlue }}>
               {typedText}
               <span className="animate-blink">|</span>
             </p>
           </div>
 
-          {/* Hackathon Count - Added below the "Decoding the Digital" text */}
+          {/* Edition banner - More compact on mobile */}
           <div 
-            className="mb-6 p-2 px-6 rounded-full backdrop-blur-sm shadow-md animate-pulse-subtle"
+            className="mb-4 sm:mb-6 p-1 sm:p-2 px-3 sm:px-6 rounded-full backdrop-blur-sm shadow-md animate-pulse-subtle"
             style={{ 
               backgroundColor: `${theme.uclaBlue}15`,
               border: `1px solid ${theme.columbiaBlue}30`,
-              marginTop: '1rem'
+              marginTop: '0.5rem',
+              maxWidth: isMobile ? '90%' : '100%'
             }}
           >
-            <p className="text-lg lg:text-xl font-bold tracking-wider" style={{ color: theme.berkeleyBlue }}>
+            <p className="text-sm sm:text-lg lg:text-xl font-bold tracking-wider" style={{ color: theme.berkeleyBlue }}>
               <span className="text-transparent bg-clip-text bg-gradient-to-r animate-text-shimmer"
                 style={{ 
-                  backgroundImage: `linear-gradient(to right, ${theme.berkeleyBlue}, ${theme.uclaBlue}, ${theme.berkeleyBlue})`,
+                  backgroundImage: `linear-gradient(to right, ${theme.eerieBlack}, ${theme.berkeleyBlue}, ${theme.eerieBlack})`, // Darker gradient
                   backgroundSize: "200% auto"
                 }}
               >
@@ -109,19 +146,21 @@ const Home = ({ authenticated }) => {
             </p>
           </div>
 
+          {/* Authentication-dependent content */}
           {authenticated ? (
-            <div className="flex flex-col items-center gap-6 mt-6 animate-fade-in">
-              <p className="text-2xl font-semibold filter drop-shadow-sm" style={{ color: theme.berkeleyBlue }}>
+            <div className="flex flex-col items-center gap-3 sm:gap-6 mt-4 sm:mt-6 animate-fade-in">
+              <p className="text-xl sm:text-2xl font-semibold filter drop-shadow-sm" style={{ color: theme.berkeleyBlue }}>
                 Welcome, {sessionStorage.getItem("name")}
               </p>
-              <div className="flex gap-5 flex-col sm:flex-row">
+              {/* Button layout - Stack on mobile, side by side on tablet and up */}
+              <div className="flex gap-3 sm:gap-5 flex-col sm:flex-row w-full sm:w-auto px-4 sm:px-0">
                 <Alink
                   to="events"
                   spy={true}
                   smooth={true}
                   duration={500}
                   offset={-70}
-                  className="px-8 py-3 rounded-md text-center cursor-pointer transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg"
+                  className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-center cursor-pointer transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg w-full"
                   style={{ 
                     backgroundColor: isExploreHovered ? theme.berkeleyBlue : "white",
                     color: isExploreHovered ? "white" : theme.berkeleyBlue,
@@ -141,7 +180,7 @@ const Home = ({ authenticated }) => {
                 </Alink>
                 <Link
                   to="/profile"
-                  className="px-8 py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg"
+                  className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg w-full"
                   style={{ 
                     backgroundColor: isProfileHovered ? theme.uclaBlue : "white",
                     color: isProfileHovered ? "white" : theme.uclaBlue,
@@ -162,10 +201,10 @@ const Home = ({ authenticated }) => {
               </div>
             </div>
           ) : (
-            <div className="flex gap-5 mt-8 sm:flex-row flex-col animate-fade-in">
+            <div className="flex gap-3 sm:gap-5 mt-4 sm:mt-8 sm:flex-row flex-col animate-fade-in w-full px-4 sm:px-0 sm:w-auto">
               <Link
                 to="/register"
-                className="px-8 py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg"
+                className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg w-full"
                 style={{ 
                   backgroundColor: isRegisterHovered ? theme.berkeleyBlue : "white",
                   color: isRegisterHovered ? "white" : theme.berkeleyBlue,
@@ -185,7 +224,7 @@ const Home = ({ authenticated }) => {
               </Link>
               <Link
                 to="/login"
-                className="px-8 py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg"
+                className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg w-full"
                 style={{ 
                   backgroundColor: isLoginHovered ? theme.uclaBlue : "white",
                   color: isLoginHovered ? "white" : theme.uclaBlue,
@@ -205,78 +244,6 @@ const Home = ({ authenticated }) => {
               </Link>
             </div>
           )}
-
-          {/* Event cards - Adjusted spacing to prevent overflow */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 mb-16 w-full max-w-5xl">
-            {[
-              {
-                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />,
-                title: "24+ Challenges",
-                desc: "Ready to test your skills",
-                gradient: `linear-gradient(135deg, ${theme.berkeleyBlue}10, ${theme.uclaBlue}20)`,
-                delay: "0"
-              },
-              {
-                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />,
-                title: "48hr Hackathon",
-                desc: "Intense coding experience",
-                gradient: `linear-gradient(135deg, ${theme.uclaBlue}10, ${theme.columbiaBlue}20)`,
-                delay: "150"
-              },
-              {
-                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />,
-                title: "₹50K+ Prizes",
-                desc: "Exciting rewards await",
-                gradient: `linear-gradient(135deg, ${theme.columbiaBlue}10, ${theme.berkeleyBlue}20)`,
-                delay: "300"
-              }
-            ].map((card, index) => (
-              <div 
-                key={index}
-                className="backdrop-blur-sm p-12 rounded-xl shadow-lg border border-white/40 hover:shadow-xl transition-all duration-500 group relative overflow-hidden hover:scale-105 animate-fade-in-up-staggered"
-                style={{ 
-                  background: card.gradient,
-                  borderColor: `${theme.columbiaBlue}30`,
-                  animationDelay: `${card.delay}ms`
-                }}
-              >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background: `linear-gradient(135deg, ${theme.columbiaBlue}30, ${theme.uclaBlue}20)`,
-                    borderRadius: '0.75rem',
-                  }}
-                ></div>
-                {/* Animated shine effect */}
-                <div 
-                  className="absolute -inset-full h-full w-20 opacity-50 group-hover:animate-card-shine z-10"
-                  style={{
-                    background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
-                    transform: "rotate(25deg)"
-                  }}
-                ></div>
-                <div className="relative z-10">
-                  <div 
-                    className="flex items-center justify-center h-24 w-24 rounded-full mb-8 mx-auto group-hover:scale-110 transition-all duration-300 shadow-md animate-pulse-subtle"
-                    style={{ 
-                      background: `linear-gradient(135deg, white, ${theme.columbiaBlue}40)`
-                    }}
-                  >
-                    <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      className="h-12 w-12" 
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke={theme.berkeleyBlue}
-                    >
-                      {card.icon}
-                    </svg>
-                  </div>
-                  <p className="font-bold text-2xl lg:text-3xl mb-4" style={{ color: theme.berkeleyBlue }}>{card.title}</p>
-                  <p className="text-lg lg:text-xl" style={{ color: `${theme.eerieBlack}99` }}>{card.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>
