@@ -113,7 +113,7 @@ export default function MainLoader() {
             textShadow: "0px 0px 5px rgba(231, 241, 251, 0.5)",
           }}
         >
-          INNOHACKS '25
+          PANORAMA'25
         </h1>
       </div>
     </div>

@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
 import "../css/button.css";
 import CountdownTimer from "../components/CountdownTImer";
-// Import the background image
-import tceBgImage from "../assets/tce-bg.png";
+import Particles from "../components/Particles"; // Import the Particles component
 
 // Color theme
 const theme = {
@@ -41,23 +40,27 @@ const Home = ({ authenticated }) => {
 
   return (
     <div className="relative w-full min-h-screen bg-white">
-      {/* Background image with increased opacity */}
-      <div 
-        className="absolute inset-0 w-full h-full z-0" 
-        style={{
-          backgroundImage: `url(${tceBgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          opacity: "0.7", // Increased opacity (less faded)
-        }}
-      ></div>
+      {/* Particles background - Increased particle count, size, and adjusted spread */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <Particles 
+          particleCount={400}  // Increased from 300 for more particles
+          particleSpread={8}   // Reduced from 12 to bring particles closer to view
+          speed={0.05}
+          particleColors={[theme.columbiaBlue, theme.aliceBlue, theme.uclaBlue]}
+          moveParticlesOnHover={true}
+          particleHoverFactor={0.7}  // Increased responsiveness to mouse
+          alphaParticles={true}
+          particleBaseSize={150}  // Increased from 80 for larger particles
+          cameraDistance={18}     // Reduced from 25 to bring particles closer
+          disableRotation={false}
+        />
+      </div>
       
-      {/* Overlay gradient with reduced opacity */}
+      {/* Overlay gradient with reduced opacity for better particle visibility */}
       <div 
         className="absolute inset-0 w-full h-full z-0" 
         style={{
-          background: "linear-gradient(to bottom, rgba(255,255,255,0.7), rgba(255,255,255,0.8))", // Reduced opacity
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0.7))",  // Reduced opacity
         }}
       ></div>
       
@@ -100,12 +103,12 @@ const Home = ({ authenticated }) => {
             }}
           >
             <p className="text-sm sm:text-lg lg:text-xl font-bold tracking-wider" style={{ color: theme.berkeleyBlue }}>
-  <span className="text-transparent bg-clip-text bg-gradient-to-r animate-text-shimmer"
-    style={{ 
-      backgroundImage: `linear-gradient(to right, ${theme.eerieBlack}, ${theme.berkeleyBlue}, ${theme.eerieBlack})`, // Darker gradient
-      backgroundSize: "200% auto"
-    }}
-  ></span>On 20th March</p>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r animate-text-shimmer"
+                style={{ 
+                  backgroundImage: `linear-gradient(to right, ${theme.eerieBlack}, ${theme.berkeleyBlue}, ${theme.eerieBlack})`, // Darker gradient
+                  backgroundSize: "200% auto"
+                }}
+              ></span>On 20th March</p>
           </div>
 
           {/* CountdownTimer - Already responsive from component */}
@@ -132,15 +135,15 @@ const Home = ({ authenticated }) => {
             }}
           >
             <p className="text-sm sm:text-lg lg:text-xl font-bold tracking-wider" style={{ color: theme.berkeleyBlue }}>
-  <span className="text-transparent bg-clip-text bg-gradient-to-r animate-text-shimmer"
-    style={{ 
-      backgroundImage: `linear-gradient(to right, ${theme.eerieBlack}, ${theme.berkeleyBlue}, ${theme.eerieBlack})`, // Darker gradient
-      backgroundSize: "200% auto"
-    }}
-  >
-    5th EDITION
-  </span> • 500+ PARTICIPANTS 
-</p>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r animate-text-shimmer"
+                style={{ 
+                  backgroundImage: `linear-gradient(to right, ${theme.eerieBlack}, ${theme.berkeleyBlue}, ${theme.eerieBlack})`, // Darker gradient
+                  backgroundSize: "200% auto"
+                }}
+              >
+                5th EDITION
+              </span> • 500+ PARTICIPANTS 
+            </p>
           </div>
 
           {/* Authentication-dependent content */}
