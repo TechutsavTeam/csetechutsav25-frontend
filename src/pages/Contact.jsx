@@ -83,7 +83,7 @@ const Contact = () => {
         </form>
 
         {/* Contact Info Section */}
-        <div className="flex flex-col gap-6 sm:p-9 sm:w-1/2">
+        <div className="flex flex-col gap-6 sm:p-9 sm:w-1/2  text-justify">
           <h1 className="text-2xl font-semibold">Have A Question? Get In Touch!</h1>
           <p>
             Thank you for visiting our website! If you have any questions or queries, 

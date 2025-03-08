@@ -89,7 +89,7 @@ const Home = ({ authenticated }) => {
                   backgroundSize: "200% auto"
                 }}
               >
-                INNOHACKS'25
+                PANORAMA'25
               </span>
             </h1>
           </div>
@@ -201,10 +201,10 @@ const Home = ({ authenticated }) => {
               </div>
             </div>
           ) : (
-            <div className="flex gap-3 sm:gap-5 mt-4 sm:mt-8 sm:flex-row flex-col animate-fade-in w-full px-4 sm:px-0 sm:w-auto">
+            <div className="flex gap-5 mt-8 sm:flex-row flex-col animate-fade-in">
               <Link
                 to="/register"
-                className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg w-full"
+                className="px-8 py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg"
                 style={{ 
                   backgroundColor: isRegisterHovered ? theme.berkeleyBlue : "white",
                   color: isRegisterHovered ? "white" : theme.berkeleyBlue,
@@ -224,7 +224,7 @@ const Home = ({ authenticated }) => {
               </Link>
               <Link
                 to="/login"
-                className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg w-full"
+                className="px-8 py-3 rounded-md text-center transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg"
                 style={{ 
                   backgroundColor: isLoginHovered ? theme.uclaBlue : "white",
                   color: isLoginHovered ? "white" : theme.uclaBlue,

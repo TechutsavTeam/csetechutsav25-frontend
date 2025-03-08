@@ -105,7 +105,7 @@ const PastYearHighlights = () => {
                   }}
                 >
                   <h2 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-gray-800">Multi-College Participation</h2>
-                  <p className="text-sm sm:text-base text-gray-600">
+                  <p className="text-sm sm:text-base text-gray-600 text-justify">
                     TECHUTSAV 2024 witnessed an unprecedented level of inter-collegiate engagement, bringing together over 25 engineering colleges from across Tamil Nadu. Students from diverse backgrounds collaborated, shared insights, and pushed the boundaries of technological innovation.
                   </p>
                 </div>
@@ -145,7 +145,7 @@ const PastYearHighlights = () => {
                   }}
                 >
                   <h2 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-gray-800">Innovative Tech Workshops</h2>
-                  <p className="text-sm sm:text-base text-gray-600">
+                  <p className="text-sm sm:text-base text-gray-600 text-justify">
                     We curated a series of cutting-edge technology workshops focusing on emerging domains. These hands-on sessions provided students with practical skills and insights from industry experts.
                   </p>
                 </div>
@@ -185,7 +185,7 @@ const PastYearHighlights = () => {
                   }}
                 >
                   <h2 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-gray-800">Industry-Academia Collaboration</h2>
-                  <p className="text-sm sm:text-base text-gray-600">
+                  <p className="text-sm sm:text-base text-gray-600 text-justify">
                     TECHUTSAV 2024 bridged the gap between academic learning and industry requirements. We hosted engaging tech events fostering innovation and collaboration between students.
                   </p>
                 </div>

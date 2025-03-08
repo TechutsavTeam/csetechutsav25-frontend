@@ -5,7 +5,7 @@ const Footer = () => {
     <div className="w-full bg-[#1c2127] text-[#bed4e9] text-base sm:text-lg py-6">
       <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center px-4 sm:px-8 lg:px-16 text-center sm:text-left">
         <div className="mb-4 sm:mb-0">
-          <h1 className="font-bold text-xl sm:text-2xl text-[#e7f1fb]">INNOHACKS&apos;25</h1>
+          <h1 className="font-bold text-xl sm:text-2xl text-[#e7f1fb]">PANORAMA&apos;25</h1>
           <p className="text-sm sm:text-base">THIAGARAJAR COLLEGE OF ENGINEERING, MADURAI</p>
         </div>
 

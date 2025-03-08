@@ -75,17 +75,16 @@ const About = () => {
 
       <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="text-center mb-16">
-        <h1 
-  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight"
-  style={{
-    background: `linear-gradient(to right, ${theme.eerieBlack}, ${theme.berkeleyBlue})`,
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  }}
->
-  ABOUT US
-</h1>
-
+          <h1 
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight"
+            style={{
+              background: `linear-gradient(to right, ${theme.eerieBlack}, ${theme.berkeleyBlue})`,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            ABOUT US
+          </h1>
           <div 
             className="h-1 w-32 mx-auto mt-4 rounded-full"
             style={{ background: `linear-gradient(to right, ${theme.uclaBlue}, ${theme.columbiaBlue})` }}
@@ -112,7 +111,7 @@ const About = () => {
                 className="relative rounded-xl shadow-lg transform transition duration-500 group-hover:scale-105"
               />
             </div>
-            <div className="lg:w-1/2 text-lg text-gray-700 leading-relaxed">
+            <div className="lg:w-1/2 text-lg text-gray-700 leading-relaxed text-justify">
               Founded in 1957 by philanthropist and industrialist late Shri karumuthu Thiagarajan Chettiar, <strong>Thiagarajar College Of Engineering(TCE)</strong> is an institution affliction to Anna university and situated in Madurai, the Temple city. The college is funded by central & state Governments and Management. The courses offered in TCE are approved by the All India council for Technical Education, New Delhi. TCE was granted Autonomy in the year 1987 and the programmes have been accredited by the National Board of Accreditation (NBA).
             </div>
           </div>
@@ -133,7 +132,7 @@ const About = () => {
   />
 </div>
 
-            <div className="lg:w-1/2 text-lg text-gray-700 leading-relaxed">
+            <div className="lg:w-1/2 text-lg text-gray-700 leading-relaxed text-justify">
               <strong>TECHUTSAV</strong> is a prestigious National Level Symposium organized annually by TCE . This event brings together experts, innovators, and students to explore the latest advancements in cybersecurity,system administration, networking and more. The symposium features a wide array of workshops and events designed to provide hands-on learning experiences and foster collaboration. Participants can engage with cutting-edge research and innovations from fields like engineering, computer science, and engineering technology management. TECHUTSAV serves as a platform for knowledge exchange, networking, and the celebration of technological progress, making it a must-attend event for technology enthusiasts and professionals alike.
             </div>
           </div>
