@@ -24,7 +24,7 @@ const Flagship = ({ uniqueName, eventName, eventDescription, image }) => {
   };
 
   return (
-    // <div className="flex flex-col h-screen bg-[#E7F1FB] px-2">
+    // <div className="flex flex-col h-screen bg-[#E7F1FB] px-2"> 
       
       <div className="flex justify-center mt-1 items-center flex-grow mb-4">
         <div
