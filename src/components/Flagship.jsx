@@ -24,26 +24,8 @@ const Flagship = ({ uniqueName, eventName, eventDescription, image }) => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#E7F1FB] px-2">
-      <div className="container mx-auto px-4 py-16 relative z-10">
-        <div className="text-center mb-1">
-          <h1 
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight"
-            style={{
-              background: `linear-gradient(to right, ${theme.eerieBlack}, ${theme.berkeleyBlue})`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            EVENTS
-          </h1>
-
-          <div 
-            className="h-1 w-32 mx-auto mt-4 rounded-full"
-            style={{ background: `linear-gradient(to right, ${theme.uclaBlue}, ${theme.columbiaBlue})` }}
-          ></div>
-        </div>
-      </div>
+    // <div className="flex flex-col h-screen bg-[#E7F1FB] px-2">
+      
       <div className="flex justify-center mt-1 items-center flex-grow mb-4">
         <div
           ref={divRef}
@@ -74,15 +56,9 @@ const Flagship = ({ uniqueName, eventName, eventDescription, image }) => {
             <span className="text-lg">See more</span>
             <span className="text-2xl">&gt;</span>
           </Link>
-          <div
-            className="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-500"
-            style={{
-              background: "radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(179, 229, 252, 0.6), transparent 80%)",
-            }}
-          />
-        </div>
       </div>
-    </div>
+      </div>
+    // </div>
   );
 };
 

@@ -4,15 +4,15 @@ import { api } from '../api/auth'
 import { useMediaQuery } from '@mui/material'
 import Flagship from '../components/Flagship'
 import CardSkeleton from '../components/CardSkeleton'
-import Skeleton from "react-loading-skeleton";
+import Skeleton from 'react-loading-skeleton'
 
 const theme = {
-  eerieBlack: "#1C2127",
-  berkeleyBlue: "#0B385F",
-  uclaBlue: "#3373B0",
-  columbiaBlue: "#BED4E9",
-  aliceBlue: "#E7F1FB"
-};
+  eerieBlack: '#1C2127',
+  berkeleyBlue: '#0B385F',
+  uclaBlue: '#3373B0',
+  columbiaBlue: '#BED4E9',
+  aliceBlue: '#E7F1FB'
+}
 
 // Static images for each department (Replace with actual image paths)
 const departmentImages = {
@@ -106,8 +106,11 @@ const Events = () => {
     api
       .get('event/getFlagshipEvents')
       .then(result => {
-        setFlagShipEvents(result.data)
-        setFlagshipLoading(false)
+        console.log(result.data.length === 0)
+        if (result.data.length !== 0) {
+          setFlagShipEvents(result.data)
+          setFlagshipLoading(false)
+        }
       })
       .catch(err => {
         console.error('Error fetching flagship events:', err)
@@ -115,8 +118,29 @@ const Events = () => {
   }, [])
 
   return (
-    <div className = 'px-5' style={{backgroundColor: '#e0f2fe'}}>
-      <div className='w-full flex justify-center'>
+    <div className='px-5' style={{ backgroundColor: '#e0f2fe' }}>
+      <div className='container mx-auto px-4 py-16 relative z-10'>
+        <div className='text-center mb-1'>
+          <h1
+            className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight'
+            style={{
+              background: `linear-gradient(to right, ${theme.eerieBlack}, ${theme.berkeleyBlue})`,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}
+          >
+            EVENTS
+          </h1>
+
+          <div
+            className='h-1 w-32 mx-auto mt-4 rounded-full'
+            style={{
+              background: `linear-gradient(to right, ${theme.uclaBlue}, ${theme.columbiaBlue})`
+            }}
+          ></div>
+        </div>
+      </div>
+      <div className='w-full flex justify-center gap-5'>
         {flagshipLoading ? (
           <CardSkeleton cards={1} />
         ) : (
@@ -135,10 +159,8 @@ const Events = () => {
           })
         )}
       </div>
-      <div
-        className='mt-44 sm:mt-0 py-10 sm:px-9 flex flex-col gap-8'
-      >
-        <div className='mt-32 sm:mt-24 md:mt-12 lg:mt-8 w-full justify-start'>
+      <div className='sm:mt-0 py-10 sm:px-9 flex flex-col gap-8'>
+        <div className='sm:mt-12 md:mt-12 lg:mt-8 w-full justify-start'>
           <h1 className='font-semibold text-2xl sm:text-3xl'>Departments</h1>
           <div className='mt-9 grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-9 items-center'>
             {departments.map((dept, i) => (
