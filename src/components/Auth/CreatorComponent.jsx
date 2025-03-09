@@ -14,12 +14,25 @@ const CreatorComponent = ({
   department,
   transactionNumber,
   selectedDepartment,
+  transactionScreenshot,
   setOpen,
   setMessage,
   setMessageBack,
 }) => {
   const navigate = useNavigate();
   useEffect(() => {
+    // Function to convert image to Base64
+    const convertImageToBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        if (!file) {
+          resolve(null); // If no image, return null
+        }
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
+    };
     // console.log(email);
     // console.log(password);
     // console.log(fullName);
@@ -28,33 +41,37 @@ const CreatorComponent = ({
     // console.log(department);
     // console.log(transactionNumber);
     // console.log(selectedDepartment);
-    api
-      .post("auth/signup", {
-        email,
-        fullName,
-        password,
-        phoneNumber: phone,
-        collegeName,
-        department,
-        transactionNumber,
-        selectedDepartment,
-      })
-      .then((result) => {
-        console.log(result);
-        if (result.status === 201) {
-          setOpen("Profile Created");
-          navigate("/login");
-        } else {
+    convertImageToBase64(transactionScreenshot)
+    .then((base64Image) => {
+      api
+        .post("auth/signup", {
+          email,
+          fullName,
+          password,
+          phoneNumber: phone,
+          collegeName,
+          department,
+          transactionNumber,
+          selectedDepartment,
+          transactionScreenshot: base64Image,
+        })
+        .then((result) => {
+          console.log(result);
+          if (result.status === 201) {
+            setOpen("Profile Created");
+            navigate("/login");
+          } else {
+            setOpen(true);
+            setMessage("Check your Network connectivity, Try Again!");
+            setMessageBack("red");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
           setOpen(true);
           setMessage("Check your Network connectivity, Try Again!");
           setMessageBack("red");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setOpen(true);
-        setMessage("Check your Network connectivity, Try Again!");
-        setMessageBack("red");
+        });
       });
   }, []);
 
